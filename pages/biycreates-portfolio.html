@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>biycreates — Portfolio</title>
+  <meta name="description" content="Portfolio of Bea Villaflor — editing, content assistance, and social media." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=General+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brown-900: #4a321d; /* deep brown */
+      --brown-700: #6b4423; /* primary accent */
+      --brown-500: #8b5e34; /* hover accent */
+      --black: #0b0b0b;     /* near-black background */
+      --white: #ffffff;     /* text / cards */
+      --muted: #b6b6b6;    /* secondary text */
+      --border: #222;      /* borders */
+      --chip: #141414;     /* pill bg */
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --radius-xl: 18px;
+      --radius-lg: 14px;
+      --radius-md: 12px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--white);
+        background: radial-gradient(1200px 800px at 80% -10%, rgba(139,94,52,.15), transparent 60%),
+                    radial-gradient(800px 600px at 0% 20%, rgba(75,50,29,.15), transparent 60%),
+                    var(--brown-900); 
+      line-height: 1.6;
+    }
+
+    /* ——— Layout ——— */
+    .container { width: min(1120px, 92%); margin-inline: auto; }
+    .section { padding: 96px 0; }
+    .grid { display: grid; gap: 24px; }
+    .grid-2 { grid-template-columns: 1.1fr 1fr; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+    @media (max-width: 960px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .section { padding: 72px 0; }
+    }
+
+    /* ——— Top Nav ——— */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(140%) blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .3px; }
+
+    nav ul { display: flex; list-style: none; gap: 18px; margin: 0; padding: 0; }
+    nav a { color: var(--muted); text-decoration: none; font-weight: 600; font-size: 14px; letter-spacing: .2px; }
+    nav a:hover, nav a.active { color: var(--white); }
+    .cta {
+      display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700;
+      color: #fff; padding: 10px 16px; border-radius: 999px; font-size: 14px; letter-spacing: .2px;
+      background: linear-gradient(135deg, var(--brown-700), var(--brown-500));
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: var(--shadow);
+    }
+
+    /* ——— Hero ——— */
+    h1 { font-family: "General Sans", Inter, system-ui, sans-serif; font-size: clamp(40px, 6vw, 68px); line-height: 1.05; margin: 12px 0 16px; }
+    .lead { color: #e9e9e9; font-size: clamp(16px, 2.5vw, 20px); max-width: 70ch; }
+
+    .hero-card {
+      margin-top: 28px; padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(20,20,20,.7), rgba(10,10,10,.7));
+    }
+
+    /* ——— Cards ——— */
+    .card {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(20,20,20,.7), rgba(10,10,10,.7));
+      border-radius: var(--radius-lg);
+      padding: 22px;
+    }
+    .card:hover { border-color: #2a2a2a; transform: translateY(-2px); transition: .25s ease; }
+
+    /* ——— Chips / Tags ——— */
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip { background: var(--chip); border: 1px solid var(--border); color: #e8e8e8; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+
+    /* ——— Headings ——— */
+    h2 { font-family: "General Sans", Inter, sans-serif; font-size: clamp(24px, 3.6vw, 36px); margin: 0 0 14px; }
+    .sub { color: var(--muted); margin-top: -2px; }
+
+    /* ——— Lists ——— */
+    .list { display: grid; gap: 14px; padding: 0; margin: 0; list-style: none; }
+    .list li { color: #eaeaea; }
+    .muted { color: var(--muted); }
+
+    /* ——— Project Card ——— */
+    .project {
+      display: grid; gap: 12px; grid-template-columns: 1fr; align-content: start;
+      min-height: 100%;
+    }
+    .project h3 { margin: 0; font-size: 18px; }
+    .project p { margin: 0; color: #e5e5e5; }
+
+    /* ——— Footer ——— */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0 48px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* ——— Utilities ——— */
+    .pill-title { display: inline-flex; gap: 10px; align-items: center; font-weight: 800; letter-spacing: .3px; }
+    .divider { height: 1px; background: var(--border); margin: 18px 0; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    /* ——— Buttons / Links ——— */
+    .btn-link { color: #fff; text-decoration: none; font-weight: 700; border-bottom: 2px solid var(--brown-700); padding-bottom: 2px; }
+    .btn-link:hover { border-color: var(--brown-500); }
+
+    /* ——— Contact ——— */
+    .contact-card { display: grid; gap: 14px; }
+
+    /* ——— Print styles ——— */
+    @media print {
+      header, .cta { display: none !important; }
+      .card, .hero-card { background: #fff; border-color: #ccc; }
+      a {text-decoration: underline; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <span>biycreates</span>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#about" class="active">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a class="cta" href="https://instagram.com/biycreates">Let's work</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="section" id="about">
+      <div class="container hero">
+        <h1>Bea Villaflor</h1>
+        <p class="lead">A 20-something creative who loves helping creators bring their ideas to life through editing, content assistance, and social media.</p>
+  
+        <div class="hero-card grid grid-2">
+          <div>
+            <div class="pill-title">What I do</div>
+            <div class="divider"></div>
+            <ul class="list">
+              <li><strong>Editing</strong> — reels, tiktok, and yt shorts</li>
+              <li><strong>Content assistance</strong> — helping with shoots, BTS vlogs, photoshoots </li>
+              <li><strong>Social media</strong> — planning, posting, captions, and engagement</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pill-title">Currently open for</div>
+            <div class="divider"></div>
+            <div class="chips" aria-label="Opportunities">
+              <span class="chip">Shortform edits</span>
+              <span class="chip">Long form edits</span>
+              <span class="chip">Content assistance</span>
+              <span class="chip">Social media management</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <h2>Work Experience</h2>
+        <p class="sub">Hands-on roles across social, production, and post.</p>
+
+        <div class="grid grid-3" style="margin-top: 24px;">
+          <article class="card">
+            <header class="project">
+              <h3>KRES — Social Media Manager</h3>
+            </header>
+            <div class="divider"></div>
+            <ul class="list">
+              <li>Managed orders, deliveries, and daily ops while planning and scheduling posts to keep the brand active. Handled the content calendar and engaged audiences to boost reach and interaction.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <header class="project">
+              <h3>MakeupbyYanaDelRey & makeupcgy — On‑call Assistant</h3>
+            </header>
+            <div class="divider"></div>
+            <ul class="list">
+              <li>Captured videos and photos of clients for social content and portfolios.</li>
+              <li>Handled inquiries for <strong>makeupcgy</strong>, created and posted content, and managed basic marketing and deliveries.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <header class="project">
+              <h3>Mezz Pub — On‑call Editor</h3>
+            </header>
+            <div class="divider"></div>
+            <ul class="list">
+              <li>Edited content as needed for campaigns and promos, aligning with brand tone and pace.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <h2>School Projects</h2>
+
+        <div class="grid grid-3" style="margin-top: 24px;">
+          <article class="card project">
+            <div>
+              <h3>Cash Buddy</h3>
+              <p>Empowers visually‑impaired users by scanning and identifying currency denominations to support financial independence.</p>
+            </div>
+            <div class="chips" aria-label="Tech">
+              <span class="chip">Python</span>
+              <span class="chip">Computer Vision</span>
+              <span class="chip">Accessibility</span>
+            </div>
+          </article>
+
+          <article class="card project">
+            <div>
+              <h3>Listify</h3>
+              <p>A To‑Do app for managing tasks with boards and quick done/undo controls.</p>
+            </div>
+            <div class="chips">
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">JavaScript</span>
+            </div>
+          </article>
+
+          <article class="card project">
+            <div>
+              <h3>DIBS</h3>
+              <p>A thrift marketplace app where users can buy or bid on preloved items, built for simple flows and convenience.</p>
+            </div>
+            <div class="chips">
+              <span class="chip">Java</span>
+              <span class="chip">Firebase</span>
+              <span class="chip">UX</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <h2>Technical Skills</h2>
+        <p class="sub">Tools I use to get things done.</p>
+
+        <div class="grid grid-3" style="margin-top: 24px;">
+          <article class="card">
+            <h3>Programming</h3>
+            <ul class="list">
+              <li>Python, Java, C++</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Web</h3>
+            <ul class="list">
+              <li>HTML, CSS, JavaScript</li>
+              <li>Figma, Canva, Picsart, Adobe</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Tools & Tech</h3>
+            <ul class="list">
+              <li>Git, Figma, Canva, Picsart, Adobe, CapCut</li>
+              <li>Microsoft Office</li>
+              <li>Trello, ClickUp, Slack</li>
+              <li>Google Drive</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container grid grid-2">
+        <div>
+          <h2>Contact</h2>
+          <p class="sub">Bookings, collabs, or quick questions — reach out.</p>
+
+          <div class="contact-card card">
+            <div>
+              <div class="muted">Email</div>
+              <a class="btn-link" href="mailto:villaflorbeea@gmail.com">villaflorbeea@gmail.com</a>
+            </div>
+            <div>
+              <div class="muted">Instagram</div>
+              <a class="btn-link" href="https://instagram.com/biycreates" target="_blank" rel="noopener">@biycreates</a>
+            </div>
+          </div>
+        </div>
+        <div>
+          </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>© <span id="yr"></span> biycreates — All rights reserved.</div>
+    </div>
+  </footer>
+  
+  <script>
+    // Year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Active link on scroll
+    const sections = Array.from(document.querySelectorAll('main section[id]'));
+    const links = Array.from(document.querySelectorAll('header nav a, header .cta'));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        const link = links.find(a => a.getAttribute('href') === `#${id}`);
+        if (link) {
+          if (entry.isIntersecting) {
+            links.forEach(a => a.classList.remove('active'));
+            link.classList.add('active');
+          }
+        }
+      });
+    }, { rootMargin: '-50% 0px -45% 0px', threshold: 0.01 });
+
+    sections.forEach(sec => observer.observe(sec));
+  </script>
+</body>
+</html>
+
+//original
